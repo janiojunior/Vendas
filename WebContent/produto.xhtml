@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Produto</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Cadastro de Produto" >
+			<h:panelGrid>
+				<p:outputLabel value="Nome:"/>
+				<p:inputText id="itNome" value="#{produtoController.produto.nome}"/>
+				
+				<p:outputLabel value="Descrição:"/>
+				<p:inputText value="#{produtoController.produto.descricao}"/>
+			
+			</h:panelGrid>
+			<f:facet name="footer">
+				<p:commandButton value="Salvar" 
+					process="@form" update="itNome"
+					actionListener="#{produtoController.salvar}"/>
+				<p:commandButton value="Limpar" 
+					process="@this" update="@form"
+					actionListener="#{produtoController.limpar}"/>
+			</f:facet>	
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
