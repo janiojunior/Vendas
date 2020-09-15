@@ -24,6 +24,10 @@
 
         <ui:include src="./footer.xhtml" />
     </div>
+  	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    </p:confirmDialog>  
 
     <h:outputStylesheet name="layout/style/layout.css"  />
     <h:outputScript name="layout/script/layout.js"  />

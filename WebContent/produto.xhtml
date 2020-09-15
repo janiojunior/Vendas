@@ -6,9 +6,14 @@
 
 	<ui:define name="content">
 
+		<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+             
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+		    <p:graphicImage name="/images/tenor.gif" />
+		</p:dialog>
 		<h:form>
-			<p:messages globalOnly="true"/>
 			<p:panel id="panel">
+				<p:growl id="growl" sticky="false" /> 
 				<f:facet name="header">
 					<div align="center">
 						<h1>Cadastro de Produto</h1>
@@ -19,7 +24,7 @@
 						<div class="card card-w-title">
 							<p:panelGrid columns="1"
 								styleClass="form-group ui-panelgrid-blank" layout="grid">
-								<p:outputLabel value="Nome: " />
+								<p:commandLink value="Nome: " onclick="PF('dlg').show();" />
 								<p:inputText id="itNome" 
 									value="#{produtoController.produto.nome}" />
 
@@ -45,12 +50,53 @@
 
 					<f:facet name="right">
 						<p:commandButton value="Excluir" icon="pi pi-trash"
-							process="@form" update="panel"
-							action="#{produtoController.excluir}">
+							process="@this" update="panel"
+							actionListener="#{produtoController.excluir}">
+							<p:confirm header="Confirmação" 
+									   message="Deseja excluir?" 
+									   icon="pi pi-exclamation-triangle"  />
 						</p:commandButton>
 					</f:facet>
 				</p:toolbar>
 			</p:panel>
+			
+			<p:dialog header="Consulta de Produtos" 
+						widgetVar="dlg" 
+						modal="true" 
+						height="300"
+						width="80%">
+			    
+			    <p:outputLabel value="Nome do produto:"/>
+			    <p:inputText id="itFiltroProduto" />
+			    <p:commandButton value="Pesquisar" 
+			    	actionListener="#{produtoController.pesquisarProduto}"
+			    	process="@this"
+			    	update="dtDados" 	/>
+			    
+			    <p:dataTable id="dtDados" value="#{produtoController.listaProduto}"
+			    			 var="obj">
+			    	<p:column>
+			    		<f:facet name="header">Id</f:facet>
+			    		<p:outputLabel value="#{obj.id}" />
+			    	</p:column>
+			    	<p:column>
+			    		<f:facet name="header">Nome</f:facet>
+			    		<p:outputLabel value="#{obj.nome}" />
+			    	</p:column>
+			    	<p:column>
+			    		<f:facet name="header">Descrição</f:facet>
+			    		<p:outputLabel value="#{obj.descricao}" />
+			    	</p:column>
+			    	<p:column>
+			    		<f:facet name="header">Ação</f:facet>
+			    		<p:commandButton value="Editar" 
+			    			actionListener="#{produtoController.editar(obj)}" 
+			    			process="@this"
+			    			update="@form "/>
+			    	</p:column>
+			    
+			    </p:dataTable>
+			</p:dialog>  
 
 		</h:form>
 	</ui:define>
