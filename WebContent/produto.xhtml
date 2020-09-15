@@ -1,32 +1,58 @@
-<!DOCTYPE html>
-<html lang="pt-br" 
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title>Cadastro de Produto</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:panel header="Cadastro de Produto" >
-			<h:panelGrid>
-				<p:outputLabel value="Nome:"/>
-				<p:inputText id="itNome" value="#{produtoController.produto.nome}"/>
-				
-				<p:outputLabel value="Descrição:"/>
-				<p:inputText value="#{produtoController.produto.descricao}"/>
-			
-			</h:panelGrid>
-			<f:facet name="footer">
-				<p:commandButton value="Salvar" 
-					process="@form" update="itNome"
-					actionListener="#{produtoController.salvar}"/>
-				<p:commandButton value="Limpar" 
-					process="@this" update="@form"
-					actionListener="#{produtoController.limpar}"/>
-			</f:facet>	
-		</p:panel>
-	</h:form>
-</h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:messages globalOnly="true"/>
+			<p:panel id="panel">
+				<f:facet name="header">
+					<div align="center">
+						<h1>Cadastro de Produto</h1>
+					</div>
+				</f:facet>
+				<div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+						<div class="card card-w-title">
+							<p:panelGrid columns="1"
+								styleClass="form-group ui-panelgrid-blank" layout="grid">
+								<p:outputLabel value="Nome: " />
+								<p:inputText id="itNome" 
+									value="#{produtoController.produto.nome}" />
+
+								<p:outputLabel value="Descrição: "/>
+								<p:inputText id="itDescricao"
+									value="#{produtoController.produto.descricao}" />
+							</p:panelGrid>
+						</div>
+					</div>
+				</div>
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
+							update="@form" action="#{produtoController.salvar}" />
+
+						<p:commandButton value="Limpar" 
+							process="@this" update="panel"
+							action="#{produtoController.limpar}">
+							<p:ajax update="@form" resetValues="true" />
+						</p:commandButton>
+
+					</f:facet>
+
+					<f:facet name="right">
+						<p:commandButton value="Excluir" icon="pi pi-trash"
+							process="@form" update="panel"
+							action="#{produtoController.excluir}">
+						</p:commandButton>
+					</f:facet>
+				</p:toolbar>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+		

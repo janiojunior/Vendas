@@ -1,0 +1,81 @@
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    .ui-widget,
+    .ui-widget .ui-widget {
+        text-decoration: none;
+    }
+    
+    .ui-widget:not(.pi),
+    .ui-widget .ui-widget:not(.pi) {
+        font-family: $fontFamily;
+        font-size: $fontSize;
+    }
+
+    .ui-icon {
+        height: $iconHeight;
+        width: $iconWidth;
+        font-size: $iconFontSize;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+        margin-top: 0;
+        position: static;
+        text-indent: 0;
+        overflow: visible;
+        background-repeat: no-repeat;
+    }
+
+    .pi {
+        font-size: $iconFontSize;
+    }
+
+    .ui-corner-all {
+        @include border-radius($borderRadius);
+    }
+
+    .ui-corner-top {
+        @include border-radius-top($borderRadius);
+    }
+
+    .ui-corner-bottom {
+        @include border-radius-bottom($borderRadius);
+    }
+
+    .ui-corner-left {
+        @include border-radius-left($borderRadius);
+    }
+
+    .ui-corner-right {
+        @include border-radius-right($borderRadius);
+    }
+
+    .ui-widget-overlay {
+        background-color: $maskBgColor;
+    }
+
+    a {
+        color: $linkColor;
+        text-decoration: none;
+
+        &:hover {
+            color: $linkHoverColor;
+        }
+
+        &:active {
+            color: $linkActiveColor;
+        }
+    }
+
+    .ui-helper-reset {
+        line-height: normal;
+    }
+
+    .ui-state-disabled {
+        @include opacity($disabledOpacity);
+    }
+}

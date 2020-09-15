@@ -1,0 +1,283 @@
+body {
+    .ui-messages {
+        padding: 0;
+        margin: $messagesMargin;
+
+        > div {
+            padding: $messagesPadding;
+            margin: 0;
+        }
+
+        .ui-messages-info {
+            background-color: $infoMessageBgColor;
+            border: $infoMessageBorder;
+            color: $infoMessageTextColor;
+            
+            .ui-messages-info-icon {
+                width: auto;
+                height: auto;
+                @include icon_override("\e924");
+                margin-top: -2px;
+                font-size: $messagesIconFontSize;
+                color: $infoMessageIconColor;
+            }
+            
+            .ui-messages-close {
+                color: $infoMessageIconColor;
+                
+                &:hover {
+                    color: lighten($infoMessageIconColor, 15%);
+                }
+            }
+        }
+        
+        .ui-messages-warn {
+            background-color: $warnMessageBgColor;
+            border: $warnMessageBorder;
+            color: $warnMessageTextColor;
+            
+            .ui-messages-warn-icon {
+                width: auto;
+                height: auto;
+                @include icon_override("\e922");
+                font-size: $messagesIconFontSize;
+                margin-top: -2px;
+                color: $warnMessageIconColor;
+            }
+            
+            .ui-messages-close {
+                color: $warnMessageIconColor;
+                
+                &:hover {
+                    color: lighten($warnMessageIconColor, 15%);
+                }
+            }
+        }
+        
+        .ui-messages-error {
+            background-color: $errorMessageBgColor;
+            border: $errorMessageBorder;
+            color: $errorMessageTextColor;
+            
+            .ui-messages-error-icon {
+                width: auto;
+                height: auto;
+                @include icon_override("\e90c");
+                font-size: $messagesIconFontSize;
+                margin-top: -2px;
+                color: $errorMessageIconColor;
+            }
+            
+            .ui-messages-close {
+                color: $errorMessageIconColor;
+                
+                &:hover {
+                    color: lighten($errorMessageIconColor, 15%);
+                }
+            }
+        }
+        
+        .ui-messages-fatal {
+            background-color: $fatalMessageBgColor;
+            border: $fatalMessageBorder;
+            color: $fatalMessageTextColor;
+            
+            .ui-messages-fatal-icon {
+                width: auto;
+                height: auto;
+                @include icon_override("\e90c");
+                font-size: $messagesIconFontSize;
+                margin-top: -2px;
+                color: $fatalMessageTextColor;
+            }
+            
+            .ui-messages-close {
+                color: $fatalMessageTextColor;
+                
+                &:hover {
+                    color: lighten($fatalMessageTextColor, 15%);
+                }
+            }
+        }
+        
+        .ui-messages-close {
+            @include transition(color $transitionDuration);
+            
+            .ui-icon {
+                @include icon_override("\e90b");
+            }
+        }
+    }
+    
+    .ui-message {
+        padding: $messagePadding;
+        margin: $messageMargin;
+        display: inline-block;
+
+        &.ui-message-info {
+            background-color: $infoMessageBgColor;
+            border: $infoMessageBorder;
+            color: $infoMessageTextColor;
+            
+            .ui-message-info-icon {
+                @include icon_override("\e923");
+                color: $infoMessageIconColor;
+                float: none;
+                vertical-align: middle;
+            }
+
+            .ui-message-info-detail,
+            .ui-message-info-summary {
+                margin-left: $inlineSpacing;
+                vertical-align: middle;
+            }
+        }
+        
+        &.ui-message-warn {
+            background-color: $warnMessageBgColor;
+            border: $warnMessageBorder;
+            color: $warnMessageTextColor;
+            
+            .ui-message-warn-icon {
+                @include icon_override("\e922");
+                color: $warnMessageIconColor;
+                float: none;
+                vertical-align: middle;
+            }
+
+            .ui-message-warn-detail,
+            .ui-message-warn-summary {
+                margin-left: $inlineSpacing;
+                vertical-align: middle;
+            }
+        }
+        
+        &.ui-message-error {
+            background-color: $errorMessageBgColor;
+            border: $errorMessageBorder;
+            color: $errorMessageTextColor;
+            
+            .ui-message-error-icon {
+                @include icon_override("\e90c");
+                color: $errorMessageIconColor;
+                float: none;
+                vertical-align: middle;
+            }
+
+            .ui-message-error-detail,
+            .ui-message-error-summary {
+                margin-left: $inlineSpacing;
+                vertical-align: middle;
+            }
+        }
+        
+        &.ui-message-fatal {
+            background-color: $fatalMessageBgColor;
+            border: $fatalMessageBorder;
+            color: $fatalMessageTextColor;
+            
+            .ui-message-fatal-icon {
+                @include icon_override("\e90c");
+                color: $fatalMessageIconColor;
+                float: none;
+                vertical-align: middle;
+            }
+
+            .ui-message-fatal-detail,
+            .ui-message-fatal-summary {
+                margin-left: $inlineSpacing;
+                vertical-align: middle;
+            }
+        }
+
+        &.ui-message-icon-only {
+            width: auto;
+            height: auto;
+        }
+    }
+    
+    .ui-growl {
+        top: 85px;
+        
+        .ui-growl-item-container {
+            margin: $growlMargin;
+            @include shadow($growlShadow);
+
+            .ui-icon-closethick {
+                @include icon_override("\e90b");
+                position: absolute;
+            }
+
+            .ui-growl-item {
+                padding: $growlPadding;
+            }
+            
+            &.ui-growl-info {
+                background-color: $infoMessageBgColor;
+                border: $infoMessageBorder;
+                color: $infoMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\e924");
+                    font-size: $growlIconFontSize;;
+                    color: $infoMessageIconColor;
+                    width: auto;
+                    height: auto;
+                }
+
+                .ui-icon {
+                    color: $infoMessageIconColor;
+                }
+            }  
+            
+            &.ui-growl-warn {
+                background-color: $warnMessageBgColor;
+                border: $warnMessageBorder;
+                color: $warnMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\e922");
+                    font-size: $growlIconFontSize;
+                    color: $warnMessageIconColor;
+                }
+
+                .ui-icon {
+                    color: $warnMessageIconColor;
+                }
+            }
+            
+            &.ui-growl-error {
+                background-color: $errorMessageBgColor;
+                border: $errorMessageBorder;
+                color: $errorMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\e90c");
+                    font-size: $growlIconFontSize;
+                    color: $errorMessageIconColor;
+                }
+
+                .ui-icon {
+                    color: $errorMessageIconColor;
+                }
+            }
+            
+            &.ui-growl-fatal {
+                background-color: $fatalMessageBgColor;
+                border: $fatalMessageBorder;
+                color: $fatalMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\e90c");
+                    font-size: $growlIconFontSize;
+                    color: $fatalMessageIconColor;
+                }
+
+                .ui-icon {
+                    color: $fatalMessageIconColor;
+                }
+            }  
+        }
+    }
+    
+}
