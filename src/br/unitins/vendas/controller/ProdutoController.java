@@ -7,13 +7,14 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import br.unitins.vendas.application.JPAUtil;
+import br.unitins.vendas.application.RepositoryException;
 import br.unitins.vendas.application.Util;
+import br.unitins.vendas.application.ValidationException;
 import br.unitins.vendas.model.Produto;
+import br.unitins.vendas.repository.ProdutoRepository;
 
 @Named
 @ViewScoped
@@ -26,14 +27,19 @@ public class ProdutoController implements Serializable {
 	
 	public void salvar() {
 		
-		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoRepository repo = new ProdutoRepository();
+		try {
+			repo.save(getProduto());
+			Util.addInfoMessage("Operação realizada com sucesso.");
+		} catch (RepositoryException e) {
+			System.out.println("Erro ao salvar.");
+			e.printStackTrace();
+			Util.addErrorMessage("Erro ao Salvar.");
+		} catch (ValidationException e) {
+			e.printStackTrace();
+			Util.addErrorMessage(e.getMessage());
+		}
 		
-		// iniciando uma transacao com o banco de dados
-		em.getTransaction().begin();
-		em.merge(getProduto());
-		em.getTransaction().commit();
-		
-		Util.addInfoMessage("Operação realizada com sucesso.");
 		limpar();
 	}
 	
@@ -62,6 +68,10 @@ public class ProdutoController implements Serializable {
 		
 		Query query = em.createQuery("SELECT p FROM Produto p ");
 		setListaProduto(query.getResultList());
+	}
+	
+	public Departamento[] getListaDepartamento() {
+		return Departamento.values();
 	}
 	
 	public List<Produto> getListaProduto() {

@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
 	
-	<display-name>Vendas</display-name>
+	<display-name>Vendas 2</display-name>
 
 	<welcome-file-list>
 		<welcome-file>hello.xhtml</welcome-file>

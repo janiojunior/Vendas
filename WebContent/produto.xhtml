@@ -31,6 +31,16 @@
 								<p:outputLabel value="Descrição: "/>
 								<p:inputText id="itDescricao"
 									value="#{produtoController.produto.descricao}" />
+									
+								<p:outputLabel value="Departamento: "/>
+								<p:selectOneMenu value="#{produtoController.produto.departamento}" >
+									<f:selectItem itemLabel="Selecione ..."/>
+									<f:selectItems 
+										value="#{produtoController.listaDepartamento}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.label}"/>
+								</p:selectOneMenu>
 							</p:panelGrid>
 						</div>
 					</div>
