@@ -7,22 +7,23 @@ import javax.persistence.Query;
 
 import br.unitins.vendas.application.JPAUtil;
 import br.unitins.vendas.application.RepositoryException;
-import br.unitins.vendas.model.Produto;
+import br.unitins.vendas.model.Usuario;
 
-public class ProdutoRepository extends Repository<Produto> {
+public class UsuarioRepository extends Repository<Usuario> {
 	
-	public ProdutoRepository() {
+	public UsuarioRepository() {
 		super();
 	}
 	
-	public ProdutoRepository(EntityManager em) {
+	public UsuarioRepository(EntityManager em) {
 		super(em);
 	}
 	
-	public List<Produto> findAll() throws RepositoryException{ 
+	public List<Usuario> findAll() throws RepositoryException{ 
+		
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
-			Query query = em.createQuery("SELECT p FROM Produto p ORDER BY p.nome");
+			Query query = em.createQuery("SELECT u FROM Usuario u ORDER BY u.nome ");
 			
 			return query.getResultList();
 		} catch (Exception e) {

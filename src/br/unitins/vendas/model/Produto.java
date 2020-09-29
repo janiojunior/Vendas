@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import br.unitins.vendas.controller.Departamento;
 
 @Entity
-public class Produto extends DefaultEntity{
+public class Produto extends DefaultEntity<Produto>{
 
 	private String nome;
 	private String descricao;

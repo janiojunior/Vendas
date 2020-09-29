@@ -16,7 +16,7 @@
 				<p:growl id="growl" sticky="false" /> 
 				<f:facet name="header">
 					<div align="center">
-						<h1>Cadastro de Produto</h1>
+						<h1>Cadastro de Usuário</h1>
 					</div>
 				</f:facet>
 				<div class="ui-g ui-fluid">
@@ -26,21 +26,22 @@
 								styleClass="form-group ui-panelgrid-blank" layout="grid">
 								<p:commandLink value="Nome: " onclick="PF('dlg').show();" />
 								<p:inputText id="itNome" 
-									value="#{produtoController.entity.nome}" />
+									value="#{usuarioController.entity.nome}" />
 
-								<p:outputLabel value="Descrição: "/>
-								<p:inputText id="itDescricao"
-									value="#{produtoController.entity.descricao}" />
+								<p:outputLabel value="Login: "/>
+								<p:inputText id="itLogin"
+									value="#{usuarioController.entity.login}" />
 									
-								<p:outputLabel value="Departamento: "/>
-								<p:selectOneMenu value="#{produtoController.entity.departamento}" >
-									<f:selectItem itemLabel="Selecione ..."/>
-									<f:selectItems 
-										value="#{produtoController.listaDepartamento}" 
-										var="obj" 
-										itemValue="#{obj}"
-										itemLabel="#{obj.label}"/>
-								</p:selectOneMenu>
+								<p:outputLabel value="Senha: "/>
+								<p:password id="itSenha"
+									value="#{usuarioController.entity.senha}" />
+									
+								<p:outputLabel value="Data de Nascimento: "/>
+								<p:inputText id="itDataNascimento"
+									value="#{usuarioController.entity.dataNascimento}" >
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</p:inputText>
+								
 							</p:panelGrid>
 						</div>
 					</div>
@@ -48,11 +49,11 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
-							update="@form" action="#{produtoController.salvar}" />
+							update="@form" action="#{usuarioController.salvar}" />
 
 						<p:commandButton value="Limpar" 
 							process="@this" update="panel"
-							action="#{produtoController.limpar}">
+							action="#{usuarioController.limpar}">
 							<p:ajax update="@form" resetValues="true" />
 						</p:commandButton>
 
@@ -61,7 +62,7 @@
 					<f:facet name="right">
 						<p:commandButton value="Excluir" icon="pi pi-trash"
 							process="@this" update="panel"
-							actionListener="#{produtoController.excluir}">
+							actionListener="#{usuarioController.excluir}">
 							<p:confirm header="Confirmação" 
 									   message="Deseja excluir?" 
 									   icon="pi pi-exclamation-triangle"  />
@@ -70,20 +71,20 @@
 				</p:toolbar>
 			</p:panel>
 			
-			<p:dialog header="Consulta de Produtos" 
+			<p:dialog header="Consulta de Usuários" 
 						widgetVar="dlg" 
 						modal="true" 
 						height="300"
 						width="80%">
 			    
-			    <p:outputLabel value="Nome do produto:"/>
-			    <p:inputText id="itFiltroProduto" />
+			    <p:outputLabel value="Nome do usuario:"/>
+			    <p:inputText id="itFiltroUsuario" />
 			    <p:commandButton value="Pesquisar" 
-			    	actionListener="#{produtoController.pesquisarProduto}"
+			    	actionListener="#{usuarioController.pesquisarUsuario}"
 			    	process="@this"
 			    	update="dtDados" 	/>
 			    
-			    <p:dataTable id="dtDados" value="#{produtoController.listaProduto}"
+			    <p:dataTable id="dtDados" value="#{usuarioController.listaUsuario}"
 			    			 var="obj">
 			    	<p:column>
 			    		<f:facet name="header">Id</f:facet>
@@ -94,13 +95,13 @@
 			    		<p:outputLabel value="#{obj.nome}" />
 			    	</p:column>
 			    	<p:column>
-			    		<f:facet name="header">Descrição</f:facet>
-			    		<p:outputLabel value="#{obj.descricao}" />
+			    		<f:facet name="header">Login</f:facet>
+			    		<p:outputLabel value="#{obj.login}" />
 			    	</p:column>
 			    	<p:column>
 			    		<f:facet name="header">Ação</f:facet>
 			    		<p:commandButton value="Editar" 
-			    			actionListener="#{produtoController.editar(obj)}" 
+			    			actionListener="#{usuarioController.editar(obj)}" 
 			    			process="@this"
 			    			update="@form "/>
 			    	</p:column>
