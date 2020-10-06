@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+	
+<h:head>
+	<title>Consulta de Marca</title>
+</h:head>
+
+<h:body>	
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/loading.gif" />
+		</p:dialog>
+
+		<h:form>
+			<p:growl id="growl" globalOnly="false" />
+			<p:panel id="panel">
+				<f:facet name="header">
+					<div align="center">
+						<div class="ui-g ui-fluid">
+							<div class="ui-g-12">					
+								<div class="card card-w-title">
+		                            <div class="ui-inputgroup">
+		                                <p:inputText id="itFiltro" 
+		                                	value="#{marcaListing.filtro}"
+		                                	placeholder="Informe o nome da marca ..." />        
+		                                <p:commandButton value="Pesquisar"
+											actionListener="#{marcaListing.pesquisar}"
+											process="@this itFiltro" update="dtListagem" /> 
+		                            </div>
+			                    </div>
+							</div>
+						</div>
+					</div>
+				</f:facet>
+				
+				 <div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+					
+						<div class="card card-w-title" >
+
+							<p:dataTable id="dtListagem" 
+								var="entity" rowIndexVar="row"
+								paginator="false"
+								reflow="true"
+								value="#{marcaListing.list}">
+								<p:column headerText="N." style="width: 30px; text-align: center;">
+									<h:outputText value="#{row + 1}" />
+								</p:column>
+			
+								<p:column headerText="Nome">
+									<p:commandLink value="#{entity.nome}"
+										actionListener="#{marcaListing.select(entity.id)}" 
+										process="@this" update="@form" resetValues="true"/>
+								</p:column>
+			
+								<f:facet name="footer">
+							        Total de #{marcaListing.list.size()} Marcas.
+							    </f:facet>
+							</p:dataTable>
+						</div>
+					</div>
+				</div>
+			</p:panel>
+
+		</h:form>
+</h:body>
+</html>

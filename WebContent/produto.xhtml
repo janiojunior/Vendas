@@ -6,11 +6,6 @@
 
 	<ui:define name="content">
 
-		<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-             
-		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-		    <p:graphicImage name="/images/tenor.gif" />
-		</p:dialog>
 		<h:form>
 			<p:panel id="panel">
 				<p:growl id="growl" sticky="false" /> 
@@ -41,6 +36,20 @@
 										itemValue="#{obj}"
 										itemLabel="#{obj.label}"/>
 								</p:selectOneMenu>
+								
+								<p:commandLink value="Marca: " 
+									actionListener="#{produtoController.abrirMarcaListing}"
+									update="@none"
+									process="@this">
+        							<p:ajax 
+        								event="dialogReturn" 
+        								listener="#{produtoController.obterMarcaListing}" 
+        								update="itMarca" />
+								</p:commandLink>
+								<p:inputText id="itMarca" 
+									value="#{produtoController.entity.marca.nome}" 
+									readonly="true"/>								
+								
 							</p:panelGrid>
 						</div>
 					</div>

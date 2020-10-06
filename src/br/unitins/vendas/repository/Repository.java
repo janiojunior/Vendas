@@ -1,5 +1,7 @@
 package br.unitins.vendas.repository;
 
+import java.lang.reflect.ParameterizedType;
+
 import javax.persistence.EntityManager;
 
 import br.unitins.vendas.application.JPAUtil;
@@ -18,9 +20,9 @@ public class Repository <T extends DefaultEntity<T>> {
 		setEntityManager(em);
 	}
 	
-	public void save(T entity) throws RepositoryException {
+	public T save(T entity) throws RepositoryException {
 		try { 
-			getEntityManager().merge(entity);
+			return getEntityManager().merge(entity);
 		} catch (Exception e) {
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
@@ -65,6 +67,17 @@ public class Repository <T extends DefaultEntity<T>> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public T findById(Integer id) {
+		// obtendo o tipo da classe de forma generica (a classe deve ser publica)
+		final ParameterizedType type = 
+				(ParameterizedType) getClass().getGenericSuperclass();
+		Class<T> tClass = (Class<T>) (type).getActualTypeArguments()[0];
+		
+		T t = (T) getEntityManager().find(tClass, id);
+		
+		return t;
 	}
 
 	public EntityManager getEntityManager() {

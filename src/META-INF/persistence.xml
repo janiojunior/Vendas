@@ -7,10 +7,10 @@
 	<persistence-unit name="Vendas">
 		<class>br.unitins.vendas.converter.jpa.ConverterDepartamento</class>
 		<class>br.unitins.vendas.model.DefaultEntity</class>
+		<class>br.unitins.vendas.model.Marca</class>
 		<class>br.unitins.vendas.model.Produto</class>
 		<class>br.unitins.vendas.model.Usuario</class>
 		
-
 		<properties>
 			<!-- DB Driver -->
 			<property name="javax.persistence.jdbc.driver"

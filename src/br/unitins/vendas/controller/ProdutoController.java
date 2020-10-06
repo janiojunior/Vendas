@@ -6,9 +6,14 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import br.unitins.vendas.application.RepositoryException;
 import br.unitins.vendas.application.Util;
+import br.unitins.vendas.controller.listing.MarcaListing;
+import br.unitins.vendas.model.Marca;
 import br.unitins.vendas.model.Produto;
+import br.unitins.vendas.repository.MarcaRepository;
 import br.unitins.vendas.repository.ProdutoRepository;
 
 @Named
@@ -18,6 +23,9 @@ public class ProdutoController extends Controller<Produto> {
 	private static final long serialVersionUID = 2843660897121724859L;
 	
 	private List<Produto> listaProduto;
+
+//  utilizado no select one menu 
+//	private List<Marca> listaMarca;
 	
 	public void pesquisarProduto() {
 		ProdutoRepository repo = new ProdutoRepository();
@@ -48,9 +56,37 @@ public class ProdutoController extends Controller<Produto> {
 	public Produto getEntity() {
 		if (entity == null) {
 			entity = new Produto();
+			entity.setMarca(new Marca());
 		}
 		return entity;
 	}
 	
+	public void abrirMarcaListing() {
+		MarcaListing listing = new MarcaListing();
+		listing.open();
+	}
+	
+	public void obterMarcaListing(SelectEvent<Marca> event) {
+		getEntity().setMarca(event.getObject());
+	}
+
+// Utilizado no select one menu
+//	public List<Marca> getListaMarca() {
+//		if (listaMarca == null) {
+//			MarcaRepository repo = new MarcaRepository();
+//			try {
+//				setListaMarca(repo.findAll());
+//			} catch (RepositoryException e) {
+//				e.printStackTrace();
+//				setListaMarca(new ArrayList<Marca>());
+//			}
+//		}
+//		return listaMarca;
+//	}
+
+// Utilizado no select one menu
+//	public void setListaMarca(List<Marca> listaMarca) {
+//		this.listaMarca = listaMarca;
+//	}
 	
 }

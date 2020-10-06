@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:panel id="panel">
+				<p:growl id="growl" sticky="false" /> 
+				<f:facet name="header">
+					<div align="center">
+						<h1>Cadastro de Marca</h1>
+					</div>
+				</f:facet>
+				<div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+						<div class="card card-w-title">
+							<p:panelGrid columns="1"
+								styleClass="form-group ui-panelgrid-blank" layout="grid">
+								<p:commandLink value="Nome: " 
+									actionListener="#{marcaController.abrirMarcaListing}"
+									update="@none"
+									process="@this">
+        							<p:ajax 
+        								event="dialogReturn" 
+        								listener="#{marcaController.obterMarcaListing}" 
+        								update="@form" />
+								</p:commandLink>
+								<p:inputText id="itNome" 
+									value="#{marcaController.entity.nome}" />
+			
+							</p:panelGrid>
+						</div>
+					</div>
+				</div>
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
+							update="@form" action="#{marcaController.salvar}" />
+
+						<p:commandButton value="Limpar" 
+							process="@this" update="panel"
+							action="#{marcaController.limpar}">
+							<p:ajax update="@form" resetValues="true" />
+						</p:commandButton>
+
+					</f:facet>
+
+					<f:facet name="right">
+						<p:commandButton value="Excluir" icon="pi pi-trash"
+							process="@this" update="panel"
+							actionListener="#{marcaController.excluir}">
+							<p:confirm header="Confirmação" 
+									   message="Deseja excluir?" 
+									   icon="pi pi-exclamation-triangle"  />
+						</p:commandButton>
+					</f:facet>
+				</p:toolbar>
+			</p:panel>
+			
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+		

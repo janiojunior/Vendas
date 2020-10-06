@@ -1,8 +1,7 @@
 package br.unitins.vendas.model;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
 import br.unitins.vendas.controller.Departamento;
 
@@ -12,6 +11,8 @@ public class Produto extends DefaultEntity<Produto>{
 	private String nome;
 	private String descricao;
 	private Departamento departamento;
+	@ManyToOne
+	private Marca marca;
 
 	public String getNome() {
 		return nome;
@@ -35,6 +36,14 @@ public class Produto extends DefaultEntity<Produto>{
 
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 	
 }
