@@ -1,8 +1,13 @@
 package br.unitins.vendas.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -14,6 +19,13 @@ public class Usuario extends DefaultEntity<Usuario> {
 	private String senha;
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true)
+	private Endereco endereco;
+	
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Telefone> listaTelefone;
 
 	public String getNome() {
 		return nome;
@@ -47,4 +59,20 @@ public class Usuario extends DefaultEntity<Usuario> {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Telefone> getListaTelefone() {
+		return listaTelefone;
+	}
+
+	public void setListaTelefone(List<Telefone> listaTelefone) {
+		this.listaTelefone = listaTelefone;
+	}
+	
 }

@@ -14,56 +14,136 @@
 						<h1>Cadastro de Usuário</h1>
 					</div>
 				</f:facet>
-				<div class="ui-g ui-fluid">
-					<div class="ui-g-12">
-						<div class="card card-w-title">
-							<p:panelGrid columns="1"
-								styleClass="form-group ui-panelgrid-blank" layout="grid">
-								<p:commandLink value="Nome: " onclick="PF('dlg').show();" />
-								<p:inputText id="itNome" 
-									value="#{usuarioController.entity.nome}" />
-
-								<p:outputLabel value="Login: "/>
-								<p:inputText id="itLogin"
-									value="#{usuarioController.entity.login}" />
-									
-								<p:outputLabel value="Senha: "/>
-								<p:password id="itSenha"
-									value="#{usuarioController.entity.senha}" />
-									
-								<p:outputLabel value="Data de Nascimento: "/>
-								<p:inputText id="itDataNascimento"
-									value="#{usuarioController.entity.dataNascimento}" >
-									<f:convertDateTime pattern="dd/MM/yyyy"/>
-								</p:inputText>
-								
-							</p:panelGrid>
+				<p:wizard backLabel="Anterior" nextLabel="Próximo">
+					<p:tab id="tabDadosPrincipais" title="Dados Principais">
+						<div class="ui-g ui-fluid">
+							<div class="ui-g-12">
+								<div class="card card-w-title">
+									<p:panelGrid columns="1"
+										styleClass="form-group ui-panelgrid-blank" layout="grid">
+										<p:commandLink value="Nome: " onclick="PF('dlg').show();" />
+										<p:inputText id="itNome" 
+											value="#{usuarioController.entity.nome}" />
+		
+										<p:outputLabel value="Login: "/>
+										<p:inputText id="itLogin"
+											value="#{usuarioController.entity.login}" />
+											
+										<p:outputLabel value="Senha: "/>
+										<p:password id="itSenha"
+											value="#{usuarioController.entity.senha}" />
+											
+										<p:outputLabel value="Data de Nascimento: "/>
+										<p:inputText id="itDataNascimento"
+											value="#{usuarioController.entity.dataNascimento}" >
+											<f:convertDateTime pattern="dd/MM/yyyy"/>
+										</p:inputText>
+										
+									</p:panelGrid>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<p:toolbar>
-					<f:facet name="left">
-						<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
-							update="@form" action="#{usuarioController.salvar}" />
-
-						<p:commandButton value="Limpar" 
-							process="@this" update="panel"
-							action="#{usuarioController.limpar}">
-							<p:ajax update="@form" resetValues="true" />
-						</p:commandButton>
-
-					</f:facet>
-
-					<f:facet name="right">
-						<p:commandButton value="Excluir" icon="pi pi-trash"
-							process="@this" update="panel"
-							actionListener="#{usuarioController.excluir}">
-							<p:confirm header="Confirmação" 
-									   message="Deseja excluir?" 
-									   icon="pi pi-exclamation-triangle"  />
-						</p:commandButton>
-					</f:facet>
-				</p:toolbar>
+					</p:tab>
+					<p:tab id="tabEndereco" title="Endereco">
+						<div class="ui-g ui-fluid">
+							<div class="ui-g-12">
+								<div class="card card-w-title">
+									<p:panelGrid columns="1"
+										styleClass="form-group ui-panelgrid-blank" layout="grid">
+										<p:outputLabel value="CEP: "/>
+										<p:inputText id="itCep" 
+											value="#{usuarioController.entity.endereco.cep}" />
+		
+										<p:outputLabel value="Bairro: "/>
+										<p:inputText id="itBairro"
+											value="#{usuarioController.entity.endereco.bairro}" />
+											
+										<p:outputLabel value="Logradouro "/>
+										<p:inputText id="itLogradouro"
+											value="#{usuarioController.entity.endereco.logradouro}" />
+										
+										<p:outputLabel value="Número "/>
+										<p:inputText id="itNumero"
+											value="#{usuarioController.entity.endereco.numero}" />
+											
+										
+									</p:panelGrid>
+								</div>
+							</div>
+						</div>
+					</p:tab>
+					<p:tab id="tabContato" title="Contato">
+						<p:panel header="Adicionar Telefone">
+							<div class="ui-g ui-fluid">
+								<div class="ui-g-12">
+									<div class="card card-w-title">
+										<p:panelGrid columns="1"
+											styleClass="form-group ui-panelgrid-blank" layout="grid">
+											<p:outputLabel value="Código de Área: "/>
+											<p:inputText id="itCodigoArea" 
+												value="#{usuarioController.telefone.codigoArea}" />
+			
+											<p:outputLabel value="Número: "/>
+											<p:inputText id="itNumeroTelefone"
+												value="#{usuarioController.telefone.numero}" />
+												
+											<p:commandButton value="Adicionar" 
+												actionListener="#{usuarioController.adicionarTelefone}" 
+												process="@this itCodigoArea itNumeroTelefone "
+												update="itCodigoArea itNumeroTelefone dtTefone"/>
+											
+										</p:panelGrid>
+									</div>
+								</div>
+							</div>
+						</p:panel>
+						
+						<p:dataTable id="dtTefone" 
+								value="#{usuarioController.entity.listaTelefone}"
+					    			 var="obj">
+					    	<p:column>
+					    		<f:facet name="header">Código Área</f:facet>
+					    		<p:outputLabel value="#{obj.codigoArea}" />
+					    	</p:column>
+					    	<p:column>
+					    		<f:facet name="header">Número</f:facet>
+					    		<p:outputLabel value="#{obj.numero}" />
+					    	</p:column>
+					    	<p:column>
+					    		<f:facet name="header">Ação</f:facet>
+					    		<p:commandButton value="Remover" 
+					    			actionListener="#{usuarioController.removerTelefone(obj)}" 
+					    			process="@this"
+					    			update="dtTefone"/>
+					    	</p:column>
+					    
+					    </p:dataTable>
+						
+						<p:toolbar>
+							<f:facet name="left">
+								<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
+									update="@form" action="#{usuarioController.salvar}" />
+		
+								<p:commandButton value="Limpar" 
+									process="@this" update="panel"
+									action="#{usuarioController.limpar}">
+									<p:ajax update="@form" resetValues="true" />
+								</p:commandButton>
+		
+							</f:facet>
+		
+							<f:facet name="right">
+								<p:commandButton value="Excluir" icon="pi pi-trash"
+									process="@this" update="panel"
+									actionListener="#{usuarioController.excluir}">
+									<p:confirm header="Confirmação" 
+											   message="Deseja excluir?" 
+											   icon="pi pi-exclamation-triangle"  />
+								</p:commandButton>
+							</f:facet>
+						</p:toolbar>
+					</p:tab>
+				</p:wizard>
 			</p:panel>
 			
 			<p:dialog header="Consulta de Usuários" 
