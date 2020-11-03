@@ -3,6 +3,7 @@ package br.unitins.vendas.repository;
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 
 import br.unitins.vendas.application.JPAUtil;
 import br.unitins.vendas.application.RepositoryException;
@@ -23,6 +24,11 @@ public class Repository <T extends DefaultEntity<T>> {
 	public T save(T entity) throws RepositoryException {
 		try { 
 			return getEntityManager().merge(entity);
+		
+		} catch (OptimisticLockException e) {
+			System.out.println("Problema de concorrencia (@version).");
+			e.printStackTrace();
+			throw new RepositoryException("Problema ao salvar. Atualize a página e tente novamente.");
 		} catch (Exception e) {
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();

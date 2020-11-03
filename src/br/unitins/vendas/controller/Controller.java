@@ -29,7 +29,8 @@ public abstract class Controller<T extends DefaultEntity<T>> implements Serializ
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
-			Util.addErrorMessage("Erro ao Salvar.");
+//			Util.addErrorMessage("Erro ao Salvar.");
+			Util.addErrorMessage(e.getMessage());
 		}
 		
 		limpar();

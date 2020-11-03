@@ -10,6 +10,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class DefaultEntity<T> {
@@ -23,6 +24,9 @@ public abstract class DefaultEntity<T> {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAtualizacao;
+	
+	@Version
+	private Integer version;
 	
 	@PrePersist
 	private void atualizaDataCriacao() {
@@ -81,6 +85,14 @@ public abstract class DefaultEntity<T> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	
 }

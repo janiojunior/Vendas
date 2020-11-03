@@ -11,6 +11,7 @@ import org.primefaces.event.SelectEvent;
 import br.unitins.vendas.application.RepositoryException;
 import br.unitins.vendas.application.Util;
 import br.unitins.vendas.controller.listing.MarcaListing;
+import br.unitins.vendas.controller.listing.ProdutoListing;
 import br.unitins.vendas.model.Marca;
 import br.unitins.vendas.model.Produto;
 import br.unitins.vendas.repository.MarcaRepository;
@@ -68,6 +69,25 @@ public class ProdutoController extends Controller<Produto> {
 	
 	public void obterMarcaListing(SelectEvent<Marca> event) {
 		getEntity().setMarca(event.getObject());
+	}
+	
+	public void abrirProdutoListing() {
+		ProdutoListing listing = new ProdutoListing();
+		listing.open();
+	}
+	
+	public void obterProdutoListing(SelectEvent<Produto> event) {
+		setEntity(event.getObject());
+	}
+	
+	public List<Marca> completeMarca(String query) {
+		MarcaRepository repo = new MarcaRepository();
+		try {
+			return repo.findByNome(query, 6);
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+			return new ArrayList<Marca>();
+		}
 	}
 
 // Utilizado no select one menu

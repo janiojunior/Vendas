@@ -56,5 +56,32 @@ public class MarcaRepository extends Repository<Marca> {
 		}
 		
 	}
+	
+	public List<Marca> findByNome(String nome, int maxResults) throws RepositoryException{ 
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			StringBuffer jpql = new StringBuffer();
+			jpql.append("SELECT ");
+			jpql.append("  m ");
+			jpql.append("FROM ");
+			jpql.append("  Marca m ");
+			jpql.append("WHERE ");
+			jpql.append("  UPPER(m.nome) like UPPER(:nome) ");
+			jpql.append("ORDER BY m.nome ");
+			
+			Query query = em.createQuery(jpql.toString());
+			query.setParameter("nome", "%"+ nome + "%");
+			
+			query.setMaxResults(maxResults);
+			
+			return query.getResultList();
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+		}
+		
+	}
+
 
 }

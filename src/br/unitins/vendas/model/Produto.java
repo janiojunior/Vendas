@@ -1,6 +1,7 @@
 package br.unitins.vendas.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import br.unitins.vendas.controller.Departamento;
@@ -11,7 +12,8 @@ public class Produto extends DefaultEntity<Produto>{
 	private String nome;
 	private String descricao;
 	private Departamento departamento;
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Marca marca;
 
 	public String getNome() {

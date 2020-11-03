@@ -17,7 +17,7 @@ public class Listing <T extends DefaultEntity<T>> implements Serializable{
 	private static final long serialVersionUID = -5153284237297309461L;
 	private String page;
 	private Repository<T> repository;
-	private List<Marca> list;
+	private List<T> list;
 
 	public Listing(String page, Repository<T> repository) {
 		super();
@@ -39,9 +39,8 @@ public class Listing <T extends DefaultEntity<T>> implements Serializable{
 	}
 	
 	public void select(int id) {
-		MarcaRepository repo = new MarcaRepository();
-		Marca marca = repo.findById(id);
-		PrimeFaces.current().dialog().closeDynamic(marca);
+		T obj = repository.findById(id);
+		PrimeFaces.current().dialog().closeDynamic(obj);
 	}
 
 	public String getPage() {
@@ -60,11 +59,11 @@ public class Listing <T extends DefaultEntity<T>> implements Serializable{
 		this.repository = repository;
 	}
 	
-	public List<Marca> getList() {
+	public List<T> getList() {
 		return list;
 	}
 
-	public void setList(List<Marca> list) {
+	public void setList(List<T> list) {
 		this.list = list;
 	}
 	
