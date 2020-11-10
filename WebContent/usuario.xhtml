@@ -66,6 +66,35 @@
 										<p:inputText id="itNumero"
 											value="#{usuarioController.entity.endereco.numero}" />
 											
+										<p:outputLabel value="Estado: "/>
+										<p:autoComplete id="acEstado" value="#{usuarioController.entity.cidade.estado}"
+												forceSelection="true"
+												minQueryLength="1"
+												dropdown="true"
+												maxResults="5"
+												moreText="Ainda tem mais ..."
+												var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
+												completeMethod="#{usuarioController.completeEstado}">
+											<p:ajax event="itemSelect" 
+													update="acCidade" 
+													process="@this acEstado" 
+													listener="#{usuarioController.teste}"/>
+											<p:ajax event="blur" 
+													update="acCidade" 
+													process="@this acEstado" 
+													listener="#{usuarioController.teste}"/>
+										</p:autoComplete>												
+										<p:outputLabel id="olCidade" 
+											value="Cidade: "/>
+										<p:autoComplete id="acCidade" value="#{usuarioController.entity.cidade}"
+												forceSelection="true"
+												minQueryLength="1"
+												dropdown="true"
+												maxResults="5"
+												moreText="Ainda tem mais ..."
+												var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"
+												disabled="#{usuarioController.entity.cidade.estado.id == null ? true : false}"
+												completeMethod="#{usuarioController.completeCidade}"/>	
 										
 									</p:panelGrid>
 								</div>

@@ -1,13 +1,17 @@
 package br.unitins.vendas.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Cidade extends DefaultEntity<Cidade> {
 
 	private String nome;
 	private String sigla;
-	private String estado;
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private Estado estado;
 
 	public String getNome() {
 		return nome;
@@ -25,11 +29,11 @@ public class Cidade extends DefaultEntity<Cidade> {
 		this.sigla = sigla;
 	}
 
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 

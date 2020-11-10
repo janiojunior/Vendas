@@ -66,6 +66,12 @@
 										actionListener="#{produtoListing.select(entity.id)}" 
 										process="@this" update="@form" resetValues="true"/>
 								</p:column>
+								
+								<p:column headerText="Exemplo do Gelmir">
+									<p:outputLabel value="#{(entity.marca.id == null ? 'Não' : 'Sim')}"/>
+									
+								</p:column>
+								
 								<f:facet name="footer">
 							        Total de #{produtoListing.list.size()} Produtos.
 							    </f:facet>

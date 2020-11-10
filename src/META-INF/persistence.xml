@@ -9,7 +9,9 @@
 		<class>br.unitins.vendas.model.Cidade</class>
 		<class>br.unitins.vendas.model.DefaultEntity</class>
 		<class>br.unitins.vendas.model.Endereco</class>
+		<class>br.unitins.vendas.model.Estado</class>
 		<class>br.unitins.vendas.model.Marca</class>
+		<class>br.unitins.vendas.model.Pessoa</class>
 		<class>br.unitins.vendas.model.Produto</class>
 		<class>br.unitins.vendas.model.Telefone</class>
 		<class>br.unitins.vendas.model.Usuario</class>

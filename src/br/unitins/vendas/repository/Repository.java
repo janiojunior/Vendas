@@ -9,7 +9,7 @@ import br.unitins.vendas.application.JPAUtil;
 import br.unitins.vendas.application.RepositoryException;
 import br.unitins.vendas.model.DefaultEntity;
 
-public class Repository <T extends DefaultEntity<T>> {
+public class Repository <T extends DefaultEntity<? super T>> {
 
 	private EntityManager entityManager;
 	

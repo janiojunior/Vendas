@@ -6,15 +6,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Usuario extends DefaultEntity<Usuario> {
+public class Usuario extends Pessoa {
 
-	private String nome;
 	private String login;
 	private String senha;
 	@Temporal(TemporalType.DATE)
@@ -27,14 +27,9 @@ public class Usuario extends DefaultEntity<Usuario> {
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> listaTelefone;
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	@ManyToOne
+	private Cidade cidade;
+	
 	public String getLogin() {
 		return login;
 	}
@@ -73,6 +68,14 @@ public class Usuario extends DefaultEntity<Usuario> {
 
 	public void setListaTelefone(List<Telefone> listaTelefone) {
 		this.listaTelefone = listaTelefone;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 	
 }

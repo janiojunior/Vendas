@@ -33,6 +33,7 @@
 
 								<p:outputLabel value="Descrição: "/>
 								<p:inputText id="itDescricao"
+									readonly="true"
 									value="#{produtoController.entity.descricao}" />
 									
 								<p:outputLabel value="Departamento: "/>
@@ -49,7 +50,7 @@
 								<p:autoComplete value="#{produtoController.entity.marca}"
 										forceSelection="true"
 										placeholder="Informe ao menos 2 letras para iniciar a consulta..."
-										minQueryLength="2"
+										minQueryLength="1"
 										dropdown="true"
 										maxResults="5"
 										moreText="Ainda tem mais ..."

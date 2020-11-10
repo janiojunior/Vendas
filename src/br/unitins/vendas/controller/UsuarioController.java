@@ -10,9 +10,13 @@ import javax.persistence.EntityManager;
 import br.unitins.vendas.application.JPAUtil;
 import br.unitins.vendas.application.RepositoryException;
 import br.unitins.vendas.application.Util;
+import br.unitins.vendas.model.Cidade;
 import br.unitins.vendas.model.Endereco;
+import br.unitins.vendas.model.Estado;
 import br.unitins.vendas.model.Telefone;
 import br.unitins.vendas.model.Usuario;
+import br.unitins.vendas.repository.CidadeRepository;
+import br.unitins.vendas.repository.EstadoRepository;
 import br.unitins.vendas.repository.UsuarioRepository;
 
 @Named
@@ -24,7 +28,36 @@ public class UsuarioController extends Controller<Usuario> {
 	private Telefone telefone;
 
 	private List<Usuario> listaUsuario;
+	
+	public void teste() {
+		System.out.println("");
+		System.out.println("");
+		System.out.println(getEntity().getCidade().getNome());
+		System.out.println("");
+		System.out.println("");	
+	}
 
+	public List<Estado> completeEstado(String query) {
+		EstadoRepository repo = new EstadoRepository();
+		try {
+			return repo.findByNome(query, 6);
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+			return new ArrayList<Estado>();
+		}
+	}
+	
+	public List<Cidade> completeCidade(String query) {
+		CidadeRepository repo = new CidadeRepository();
+		try {
+			return repo.findByNome(query, getEntity().getCidade().getEstado().getId(), 6);
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+			return new ArrayList<Cidade>();
+		}
+	}
+	
+	
 	public void pesquisarUsuario() {
 		EntityManager em = JPAUtil.getEntityManager();
 		UsuarioRepository repo = new UsuarioRepository();
@@ -66,6 +99,8 @@ public class UsuarioController extends Controller<Usuario> {
 		if (entity == null) {
 			entity = new Usuario();
 			entity.setEndereco(new Endereco());
+			entity.setCidade(new Cidade());
+			entity.getCidade().setEstado(new Estado());
 		}
 		return entity;
 	}

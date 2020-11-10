@@ -7,7 +7,7 @@ import br.unitins.vendas.application.Util;
 import br.unitins.vendas.model.DefaultEntity;
 import br.unitins.vendas.repository.Repository;
 
-public abstract class Controller<T extends DefaultEntity<T>> implements Serializable {
+public abstract class Controller<T extends DefaultEntity<? super T>> implements Serializable {
 
 	private static final long serialVersionUID = 3094966366555764771L;
 	
