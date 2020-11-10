@@ -29,14 +29,6 @@ public class UsuarioController extends Controller<Usuario> {
 
 	private List<Usuario> listaUsuario;
 	
-	public void teste() {
-		System.out.println("");
-		System.out.println("");
-		System.out.println(getEntity().getCidade().getNome());
-		System.out.println("");
-		System.out.println("");	
-	}
-
 	public List<Estado> completeEstado(String query) {
 		EstadoRepository repo = new EstadoRepository();
 		try {

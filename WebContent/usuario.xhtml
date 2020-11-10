@@ -77,12 +77,10 @@
 												completeMethod="#{usuarioController.completeEstado}">
 											<p:ajax event="itemSelect" 
 													update="acCidade" 
-													process="@this acEstado" 
-													listener="#{usuarioController.teste}"/>
+													process="@this acEstado" />
 											<p:ajax event="blur" 
 													update="acCidade" 
-													process="@this acEstado" 
-													listener="#{usuarioController.teste}"/>
+													process="@this acEstado" />
 										</p:autoComplete>												
 										<p:outputLabel id="olCidade" 
 											value="Cidade: "/>
