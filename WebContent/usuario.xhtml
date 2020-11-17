@@ -10,9 +10,16 @@
 			<p:panel id="panel">
 				<p:growl id="growl" sticky="false" /> 
 				<f:facet name="header">
-					<div align="center">
-						<h1>Cadastro de Usuário</h1>
-					</div>
+					<div>
+						<div align="center" style="width: 85%; display: inline-block;">
+							<h1>Cadastro de Usuário</h1>
+						</div>
+						<div align="right" style="float: right; position: relative;">
+							<img class="img-responsive"
+						     style="max-width: 80px!important;max-height: 80px!important;"            
+						     src="/Vendas/faces/img-usuario?nome=#{usuarioController.entity.id}.png"/>
+						</div>
+					</div>				
 				</f:facet>
 				<p:wizard backLabel="Anterior" nextLabel="Próximo">
 					<p:tab id="tabDadosPrincipais" title="Dados Principais">
@@ -38,6 +45,16 @@
 											value="#{usuarioController.entity.dataNascimento}" >
 											<f:convertDateTime pattern="dd/MM/yyyy"/>
 										</p:inputText>
+										
+										<h:form enctype="multipart/form-data"> 
+											<p:fileUpload listener="#{usuarioController.upload}" 
+														  label="#{usuarioController.nomeFoto}"
+														  mode="advanced"
+										                  update="@this messages" 
+										                  auto="false" sizeLimit="200000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+										         
+										    <p:growl id="messages" showDetail="true" /> 
+										</h:form>
 										
 									</p:panelGrid>
 								</div>

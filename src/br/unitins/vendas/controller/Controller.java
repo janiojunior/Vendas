@@ -22,7 +22,7 @@ public abstract class Controller<T extends DefaultEntity<? super T>> implements 
 		Repository<T> repo = new Repository<T>();
 		try {
 			repo.beginTransaction();
-			repo.save(getEntity());
+			setEntity(repo.save(getEntity()));
 			repo.commitTransaction();
 			Util.addInfoMessage("Operação realizada com sucesso.");
 		} catch (RepositoryException e) {
