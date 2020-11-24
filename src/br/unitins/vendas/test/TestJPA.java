@@ -1,7 +1,7 @@
 package br.unitins.vendas.test;
 
 import br.unitins.vendas.application.RepositoryException;
-import br.unitins.vendas.controller.Departamento;
+import br.unitins.vendas.model.Departamento;
 import br.unitins.vendas.model.Marca;
 import br.unitins.vendas.model.Produto;
 import br.unitins.vendas.repository.MarcaRepository;

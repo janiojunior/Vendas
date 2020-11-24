@@ -67,5 +67,15 @@ public class Util {
 		
 		return true;
 	}
+	
+	public static void redirect(String page) {
+		try {
+			FacesContext.getCurrentInstance()
+				.getExternalContext().redirect(page);
+		} catch (IOException e) {
+			e.printStackTrace();
+			addErrorMessage("Problemas ao redirecionar a página.");
+		}
+	}
 
 }

@@ -12,12 +12,11 @@ import br.unitins.vendas.model.Marca;
 import br.unitins.vendas.repository.MarcaRepository;
 import br.unitins.vendas.repository.Repository;
 
-public class Listing <T extends DefaultEntity<T>> implements Serializable{
+public class Listing <T extends DefaultEntity<? super T>> implements Serializable{
 	
 	private static final long serialVersionUID = -5153284237297309461L;
 	private String page;
 	private Repository<T> repository;
-	private List<T> list;
 
 	public Listing(String page, Repository<T> repository) {
 		super();
@@ -57,14 +56,6 @@ public class Listing <T extends DefaultEntity<T>> implements Serializable{
 
 	public void setRepository(Repository<T> repository) {
 		this.repository = repository;
-	}
-	
-	public List<T> getList() {
-		return list;
-	}
-
-	public void setList(List<T> list) {
-		this.list = list;
 	}
 	
 }

@@ -57,5 +57,31 @@ public class ProdutoRepository extends Repository<Produto> {
 		}
 
 	}
+	
+	public List<Object[]> findByNomeSQL(String nome) throws RepositoryException {
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT ");
+			sql.append("  p.id, p.nome, m.nome as nomeMarca ");
+			sql.append("FROM ");
+			sql.append("  produto p, ");
+			sql.append("  marca m ");
+			sql.append("WHERE ");
+			sql.append("  p.marca_id = m.id ");
+			sql.append("  AND UPPER(p.nome) like UPPER(?) ");
+			sql.append("ORDER BY p.nome ");
+
+			Query query = em.createNativeQuery(sql.toString());
+			query.setParameter(1, "%" + nome + "%");
+
+			return query.getResultList();
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+		}
+
+	}
 
 }

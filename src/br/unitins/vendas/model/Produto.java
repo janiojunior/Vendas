@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
-import br.unitins.vendas.controller.Departamento;
-
 @Entity
 public class Produto extends DefaultEntity<Produto>{
 

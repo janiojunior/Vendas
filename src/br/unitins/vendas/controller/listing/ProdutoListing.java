@@ -1,6 +1,7 @@
 package br.unitins.vendas.controller.listing;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -15,6 +16,7 @@ public class ProdutoListing extends Listing<Produto> {
 	
 	private static final long serialVersionUID = -9011762519094386462L;
 	private String filtro;
+	private List<Produto> list;
 
 	public ProdutoListing() {
 		super("produtolisting", new ProdutoRepository());
@@ -38,5 +40,12 @@ public class ProdutoListing extends Listing<Produto> {
 		this.filtro = filtro;
 	}
 
+	public List<Produto> getList() {
+		return list;
+	}
+
+	public void setList(List<Produto> list) {
+		this.list = list;
+	}
 	
 }

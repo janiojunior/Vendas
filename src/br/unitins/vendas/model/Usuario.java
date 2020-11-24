@@ -20,6 +20,8 @@ public class Usuario extends Pessoa {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
+	private Perfil perfil;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true)
 	private Endereco endereco;
@@ -77,5 +79,14 @@ public class Usuario extends Pessoa {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+	
 	
 }

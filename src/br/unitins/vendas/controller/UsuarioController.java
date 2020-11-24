@@ -18,6 +18,7 @@ import br.unitins.vendas.application.Util;
 import br.unitins.vendas.model.Cidade;
 import br.unitins.vendas.model.Endereco;
 import br.unitins.vendas.model.Estado;
+import br.unitins.vendas.model.Perfil;
 import br.unitins.vendas.model.Telefone;
 import br.unitins.vendas.model.Usuario;
 import br.unitins.vendas.repository.CidadeRepository;
@@ -140,6 +141,10 @@ public class UsuarioController extends Controller<Usuario> {
 
 	public void setListaUsuario(List<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
+	}
+	
+	public Perfil[] getListaPerfil() {
+		return Perfil.values();
 	}
 
 	@Override

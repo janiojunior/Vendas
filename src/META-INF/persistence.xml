@@ -6,6 +6,7 @@
 		http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="Vendas">
 		<class>br.unitins.vendas.converter.jpa.ConverterDepartamento</class>
+		<class>br.unitins.vendas.converter.jpa.ConverterPerfil</class>
 		<class>br.unitins.vendas.model.Cidade</class>
 		<class>br.unitins.vendas.model.DefaultEntity</class>
 		<class>br.unitins.vendas.model.Endereco</class>

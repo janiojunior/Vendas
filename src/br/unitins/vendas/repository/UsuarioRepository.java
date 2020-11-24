@@ -33,5 +33,35 @@ public class UsuarioRepository extends Repository<Usuario> {
 		}
 		
 	}
+	
+	public Usuario findUsuario(String login, String senha) throws RepositoryException{ 
+		
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			
+			StringBuffer jpql = new StringBuffer();
+			jpql.append("SELECT ");
+			jpql.append("  u ");
+			jpql.append("FROM ");
+			jpql.append("  Usuario u ");
+			jpql.append("WHERE ");
+			jpql.append("  u.login = :login ");
+			jpql.append("  AND u.senha = :senha ");
+			
+			Query query = em.createQuery(jpql.toString());
+			query.setParameter("login", login);
+			query.setParameter("senha", senha);
+			
+			// Utilizar o single result quando tem certeza de um unico retorno de objetos
+			// O single result gera um excecao quando nao encontra a informacao
+			return (Usuario) query.getSingleResult();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 }

@@ -1,4 +1,4 @@
-package br.unitins.vendas.controller;
+package br.unitins.vendas.model;
 
 public enum Departamento {
 	TELEFONIA(1, "Telefonia"), 

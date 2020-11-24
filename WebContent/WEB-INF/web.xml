@@ -5,6 +5,10 @@
 	id="WebApp_ID" version="4.0">
 	
 	<display-name>Vendas 2</display-name>
+	
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 
 	<welcome-file-list>
 		<welcome-file>hello.xhtml</welcome-file>

@@ -7,28 +7,28 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.vendas.application.RepositoryException;
-import br.unitins.vendas.model.Marca;
-import br.unitins.vendas.repository.MarcaRepository;
+import br.unitins.vendas.model.Produto;
+import br.unitins.vendas.repository.ProdutoRepository;
 
 @Named
 @ViewScoped
-public class MarcaListing extends Listing<Marca> {
-	
+public class ProdutoListingSql extends Listing<Produto> {
+
 	private static final long serialVersionUID = -9011762519094386462L;
 	private String filtro;
-	private List<Marca> list;
+	private List<Object[]> list;
 
-	public MarcaListing() {
-		super("marcalisting", new MarcaRepository());
+	public ProdutoListingSql() {
+		super("produtolistingsql", new ProdutoRepository());
 	}
-	
+
 	public void pesquisar() {
-		MarcaRepository repo = (MarcaRepository)getRepository();
+		ProdutoRepository repo = (ProdutoRepository) getRepository();
 		try {
-			setList(repo.findByNome(filtro));
+			setList(repo.findByNomeSQL(filtro));
 		} catch (RepositoryException e) {
 			e.printStackTrace();
-			setList(new ArrayList<Marca>());
+			setList(new ArrayList<Object[]>());
 		}
 	}
 
@@ -40,13 +40,12 @@ public class MarcaListing extends Listing<Marca> {
 		this.filtro = filtro;
 	}
 
-	public List<Marca> getList() {
+	public List<Object[]> getList() {
 		return list;
 	}
 
-	public void setList(List<Marca> list) {
+	public void setList(List<Object[]> list) {
 		this.list = list;
 	}
-	
-	
+
 }

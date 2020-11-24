@@ -12,6 +12,8 @@ import br.unitins.vendas.application.RepositoryException;
 import br.unitins.vendas.application.Util;
 import br.unitins.vendas.controller.listing.MarcaListing;
 import br.unitins.vendas.controller.listing.ProdutoListing;
+import br.unitins.vendas.controller.listing.ProdutoListingSql;
+import br.unitins.vendas.model.Departamento;
 import br.unitins.vendas.model.Marca;
 import br.unitins.vendas.model.Produto;
 import br.unitins.vendas.repository.MarcaRepository;
@@ -72,7 +74,7 @@ public class ProdutoController extends Controller<Produto> {
 	}
 	
 	public void abrirProdutoListing() {
-		ProdutoListing listing = new ProdutoListing();
+		ProdutoListingSql listing = new ProdutoListingSql();
 		listing.open();
 	}
 	

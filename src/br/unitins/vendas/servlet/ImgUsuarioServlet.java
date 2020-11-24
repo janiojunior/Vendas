@@ -14,7 +14,7 @@ import br.unitins.vendas.application.Util;
 
  
 //servlet responsavel por retornar uma imagem atravé do nome da imagem (ex. 01.png)
-@WebServlet("/img-usuario")
+@WebServlet("/pages/img-usuario")
 public class ImgUsuarioServlet extends HttpServlet {
 	/**
 	 * 

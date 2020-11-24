@@ -3,7 +3,7 @@ package br.unitins.vendas.converter.jpa;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import br.unitins.vendas.controller.Departamento;
+import br.unitins.vendas.model.Departamento;
 
 @Converter(autoApply = true)
 public class ConverterDepartamento implements AttributeConverter<Departamento, Integer>{
