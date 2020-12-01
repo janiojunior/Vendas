@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="head">
+		<style type="text/css">
+			.ui-panelgrid.form-elements .ui-grc-2 {
+				padding-left: 60px;
+			}
+			
+			@media ( max-width :1024px) {
+				.ui-panelgrid.form-elements .ui-grc-2 {
+					padding-left: 20px;
+				}
+			}
+			
+			@media ( max-width :640px) {
+				.ui-panelgrid.form-elements .ui-grc-2 {
+					padding-left: 6px;
+				}
+			}
+			
+			.dialogDemo label {
+				line-height: 2.1em;
+			}
+			</style>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/loading.gif" />
+		</p:dialog>
+
+		<h:form>
+			<p:growl id="growl" globalOnly="false" />
+			<p:panel id="panel">
+				<f:facet name="header">
+					<div align="center">
+						<h1>Relatório de Produtos</h1>
+					</div>
+				</f:facet>
+				<div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+						<div class="card card-w-title">
+							<p:panelGrid columns="1"
+								styleClass="form-group ui-panelgrid-blank" layout="grid">
+								
+								<p:outputLabel id="labelMarca" value="Filtro por Marca:" />
+								<p:selectOneMenu id="selectMarca" value="#{relatorioProdutoController.marca}" >
+									<f:selectItem itemLabel="TODAS AS MARCAS" />
+									<f:selectItems value="#{relatorioProdutoController.listaMarca}"
+												var="marca"
+												itemLabel="#{marca.nome}"
+												itemValue="#{marca}"/>	
+								</p:selectOneMenu>						
+								
+							</p:panelGrid>
+
+							
+						</div>
+					</div>
+				</div>
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Buscar Produtos" icon="pi pi-check" process="@form"
+							update="@form" actionListener="#{relatorioProdutoController.pesquisar}" />
+
+						<p:commandButton value="Limpar" 
+							process="@this" update="@form"
+							actionListener="#{relatorioProdutoController.limpar()}">
+							<p:ajax update="@form" resetValues="true" />
+						</p:commandButton>
+
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton value="Gerar Relatório" ajax="false"
+							disabled="#{relatorioProdutoController.listaProduto.isEmpty()}"
+							actionListener="#{relatorioProdutoController.gerarRelatorio}" 
+							onclick="this.form.target='_blank'">
+						</p:commandButton>
+
+					</f:facet>
+				</p:toolbar>				
+			</p:panel>
+
+		    <p:dataTable id="dtListagem" var="entity" value="#{relatorioProdutoController.listaProduto}">
+			    <p:column headerText="Nome">
+			        <h:commandLink value="#{entity.nome}" />
+			    </p:column>
+			 
+			    <p:column headerText="Descricao">
+			        <h:outputText value="#{entity.descricao}" />
+			    </p:column>
+			 
+			    <p:column headerText="Departamento">
+			        <h:outputText value="#{entity.departamento.label}" />
+			    </p:column>
+			    
+			    <p:column headerText="Marca">
+			        <h:outputText value="#{entity.marca.nome}" />
+			    </p:column>				       
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

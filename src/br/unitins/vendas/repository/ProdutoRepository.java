@@ -58,6 +58,30 @@ public class ProdutoRepository extends Repository<Produto> {
 
 	}
 	
+	public List<Produto> findByMarca(Integer idMarca) throws RepositoryException {
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			StringBuffer jpql = new StringBuffer();
+			jpql.append("SELECT ");
+			jpql.append("  p ");
+			jpql.append("FROM ");
+			jpql.append("  Produto p ");
+			jpql.append("WHERE ");
+			jpql.append("  p.marca.id = :marca ");
+			jpql.append("ORDER BY p.nome ");
+
+			Query query = em.createQuery(jpql.toString());
+			query.setParameter("marca", idMarca);
+
+			return query.getResultList();
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+		}
+
+	}	
+	
 	public List<Object[]> findByNomeSQL(String nome) throws RepositoryException {
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
